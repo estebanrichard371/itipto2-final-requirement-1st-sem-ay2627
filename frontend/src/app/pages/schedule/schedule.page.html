@@ -1,0 +1,258 @@
+<ion-header>
+
+    <ion-toolbar color="primary">
+
+      <ion-title>
+
+        <ion-icon name="calendar"></ion-icon>
+
+        Class Schedule
+
+      </ion-title>
+
+    </ion-toolbar>
+
+  </ion-header>
+
+
+  <ion-content class="ion-padding">
+
+
+    <nav class="tabs">
+
+      <a routerLink="/dashboard">Dashboard</a>
+
+      <a routerLink="/schedule" class="active">
+        Schedule
+      </a>
+
+      <a routerLink="/grading">Grading</a>
+
+      <a
+        *ngIf="auth.role() === 'registrar'"
+        routerLink="/students">
+        Students
+      </a>
+
+      <a
+        *ngIf="auth.role() === 'teacher'"
+        routerLink="/attendance">
+        Attendance
+      </a>
+
+      <a routerLink="/records">Records</a>
+
+    </nav>
+
+
+    <h1>Class Schedule</h1>
+
+    <p>Your daily class timetable</p>
+
+
+    <!-- REGISTRAR FORM -->
+
+    <ion-card *ngIf="auth.role() === 'registrar'">
+
+      <ion-card-content>
+
+        <h2>
+          {{editingId ? 'Edit Schedule' : 'Add Schedule'}}
+        </h2>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            Subject
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="form.subject">
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            Day
+          </ion-label>
+
+          <ion-select
+            [(ngModel)]="form.day_of_week">
+
+            <ion-select-option
+              *ngFor="let day of days"
+              [value]="day">
+
+              {{day}}
+
+            </ion-select-option>
+
+          </ion-select>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            Start Time
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="form.start_time"
+            placeholder="7:30 AM">
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            End Time
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="form.end_time"
+            placeholder="9:00 AM">
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            Room
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="form.room">
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            Instructor
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="form.instructor">
+          </ion-input>
+
+        </ion-item>
+
+
+        <p class="error" *ngIf="error">
+          {{error}}
+        </p>
+
+
+        <ion-button
+          expand="block"
+          (click)="save()">
+
+          <ion-icon name="save" slot="start"></ion-icon>
+
+          Save Schedule
+
+        </ion-button>
+
+
+        <ion-button
+          expand="block"
+          fill="clear"
+          (click)="reset()">
+
+          Clear
+
+        </ion-button>
+
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <!-- SCHEDULE LIST -->
+
+    <ion-card
+      *ngFor="let s of school.schedules()">
+
+      <ion-card-content>
+
+        <h2>{{s.subject}}</h2>
+
+        <p>
+
+          <ion-icon name="time"></ion-icon>
+
+          {{s.start_time}} - {{s.end_time}}
+
+        </p>
+
+
+        <p>
+
+          <ion-icon name="location"></ion-icon>
+
+          Room: {{s.room}}
+
+        </p>
+
+
+        <p>
+
+          <ion-icon name="person"></ion-icon>
+
+          Instructor: {{s.instructor}}
+
+        </p>
+
+
+        <p>{{s.day_of_week}}</p>
+
+
+        <ng-container
+          *ngIf="auth.role() === 'registrar'">
+
+          <ion-button
+            size="small"
+            fill="outline"
+            (click)="edit(s)">
+
+            <ion-icon name="create"></ion-icon>
+
+            Edit
+
+          </ion-button>
+
+
+          <ion-button
+            size="small"
+            color="danger"
+            fill="outline"
+            (click)="remove(s.id)">
+
+            <ion-icon name="trash"></ion-icon>
+
+            Delete
+
+          </ion-button>
+
+        </ng-container>
+
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+  </ion-content>

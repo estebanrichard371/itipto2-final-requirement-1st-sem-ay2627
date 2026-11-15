@@ -1,0 +1,218 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Attendance Monitoring</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <nav class="tabs">
+  <a routerLink="/dashboard" routerLinkActive="active">
+    Dashboard
+  </a>
+
+  <a routerLink="/schedule" routerLinkActive="active">
+    Schedule
+  </a>
+
+  <a routerLink="/grading" routerLinkActive="active">
+    Grading
+  </a>
+
+  <a routerLink="/attendance" routerLinkActive="active">
+    Attendance
+  </a>
+
+  <a routerLink="/records" routerLinkActive="active">
+    Records
+  </a>
+
+  
+</nav>
+
+  <h2>Quarterly Attendance Records</h2>
+
+  <p class="subtitle">
+    Monitor student attendance for each grading period.
+  </p>
+
+  <!-- GRADING PERIOD SELECTION -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Academic Period</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label position="stacked">
+          Select Grading Period
+        </ion-label>
+
+        <ion-select
+          [(ngModel)]="selectedPeriod"
+          interface="popover"
+          placeholder="Choose Grading Period">
+
+          <ion-select-option
+            *ngFor="let period of periods"
+            [value]="period">
+            {{ period }}
+          </ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">
+          Start Date
+        </ion-label>
+        <input
+          type="date"
+          [(ngModel)]="startDate"
+          class="date-input">
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">
+          End Date
+        </ion-label>
+        <input
+          type="date"
+          [(ngModel)]="endDate"
+          class="date-input">
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        (click)="loadAttendance()"
+        [disabled]="loading()">
+
+        <ion-spinner
+          *ngIf="loading()"
+          name="crescent">
+        </ion-spinner>
+
+        <span *ngIf="!loading()">
+          VIEW ATTENDANCE RECORDS
+        </span>
+
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- ERROR MESSAGE -->
+  <ion-card *ngIf="errorMessage()">
+    <ion-card-content>
+      <p class="error-message">
+        {{ errorMessage() }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- ATTENDANCE SUMMARY -->
+  <div *ngIf="hasSearched()">
+
+    <h2>{{ selectedPeriod }} Summary</h2>
+
+    <div class="summary-grid">
+
+      <div class="summary-card">
+        <h3>Total Present</h3>
+        <h1>{{ totalPresent() }}</h1>
+      </div>
+
+      <div class="summary-card present-card">
+        <h3>Total Absent</h3>
+        <h1>{{ totalAbsent() }}</h1>
+      </div>
+
+      <div class="summary-card late-card">
+        <h3>Total Late</h3>
+        <h1>{{ totalLate() }}</h1>
+      </div>
+
+      <div class="summary-card">
+        <h3>Attendance Rate</h3>
+        <h1>{{ overallAttendancePercentage() }}%</h1>
+      </div>
+
+    </div>
+
+    <!-- STUDENT ATTENDANCE TABLE -->
+    <ion-card>
+
+      <ion-card-header>
+        <ion-card-title>
+          Student Attendance Details
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <div class="table-container">
+
+          <table>
+            <thead>
+              <tr>
+                <th>Student No.</th>
+                <th>Student Name</th>
+                <th>Present</th>
+                <th>Absent</th>
+                <th>Late</th>
+                <th>Total Days</th>
+                <th>Attendance %</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr *ngFor="let student of records()">
+
+                <td>{{ student.student_number }}</td>
+
+                <td>{{ student.student_name }}</td>
+
+                <td class="present-text">
+                  {{ student.total_present }}
+                </td>
+
+                <td class="absent-text">
+                  {{ student.total_absent }}
+                </td>
+
+                <td class="late-text">
+                  {{ student.total_late }}
+                </td>
+
+                <td>
+                  {{ student.total_recorded_days }}
+                </td>
+
+                <td class="percentage-text">
+                  {{ student.attendance_percentage }}%
+                </td>
+
+              </tr>
+
+              <tr *ngIf="records().length === 0">
+                <td colspan="7" class="empty-message">
+                  No attendance records found for this period.
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+      </ion-card-content>
+
+
+
+    </ion-card>
+
+  </div>
+
+</ion-content>

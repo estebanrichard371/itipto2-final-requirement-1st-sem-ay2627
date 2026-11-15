@@ -1,0 +1,130 @@
+<ion-header>
+
+    <ion-toolbar color="primary">
+
+      <ion-title>
+
+        <ion-icon name="checkmark-circle"></ion-icon>
+
+        Student Attendance
+
+      </ion-title>
+
+    </ion-toolbar>
+
+  </ion-header>
+
+
+  <ion-content class="ion-padding">
+
+
+    <nav class="tabs">
+
+      <a routerLink="/dashboard">Dashboard</a>
+
+      <a routerLink="/schedule">Schedule</a>
+
+      <a routerLink="/grading">Grading</a>
+
+      <a routerLink="/attendance" class="active">
+        Attendance
+      </a>
+
+      <a routerLink="/records">Records</a>
+
+    </nav>
+
+
+    <h1>Student Attendance</h1>
+
+    <p>Select each student's attendance status</p>
+
+
+    <ion-item>
+
+      <ion-label position="stacked">
+        Attendance Date
+      </ion-label>
+
+      <ion-input
+        type="date"
+        [(ngModel)]="attendanceDate"
+        (ionChange)="loadExisting()">
+      </ion-input>
+
+    </ion-item>
+
+
+    <ion-card
+      *ngFor="let s of school.students()">
+
+      <ion-card-content>
+
+        <h2>
+          {{s.first_name}} {{s.last_name}}
+        </h2>
+
+        <p>
+          Student ID: {{s.student_number}}
+        </p>
+
+
+        <ion-item>
+
+          <ion-label>Status</ion-label>
+
+          <ion-select
+            [(ngModel)]="statuses[s.id]">
+
+            <ion-select-option value="Present">
+              Present
+            </ion-select-option>
+
+            <ion-select-option value="Absent">
+              Absent
+            </ion-select-option>
+
+            <ion-select-option value="Late">
+              Late
+            </ion-select-option>
+
+          </ion-select>
+
+        </ion-item>
+
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <p class="error" *ngIf="message()">
+      {{message()}}
+    </p>
+
+
+    <ion-button
+      expand="block"
+      (click)="save()"
+      [disabled]="saving()">
+
+      <ion-icon name="save" slot="start"></ion-icon>
+
+      {{saving() ? 'Saving...' : 'Save Attendance'}}
+
+    </ion-button>
+
+
+    <ion-button
+      expand="block"
+      fill="outline"
+      (click)="reset()">
+
+      <ion-icon name="refresh" slot="start"></ion-icon>
+
+      Reset All to Present
+
+    </ion-button>
+
+
+  </ion-content>

@@ -1,0 +1,254 @@
+
+<ion-header>
+
+    <ion-toolbar color="primary">
+
+      <ion-title>
+
+        <ion-icon name="school"></ion-icon>
+
+        School Attendance System
+
+      </ion-title>
+
+
+      <ion-buttons slot="end">
+
+        <ion-button (click)="logout()">
+
+          <ion-icon name="log-out"></ion-icon>
+
+        </ion-button>
+
+      </ion-buttons>
+
+    </ion-toolbar>
+
+  </ion-header>
+
+
+  <ion-content class="ion-padding">
+
+
+    <nav class="tabs">
+
+      <a routerLink="/dashboard" class="active">
+        Dashboard
+      </a>
+
+      <a routerLink="/schedule">
+        Schedule
+      </a>
+
+      <a routerLink="/grading">
+        Grading
+      </a>
+
+      <a
+        *ngIf="auth.role() === 'registrar'"
+        routerLink="/students">
+        Students
+      </a>
+
+      <a
+        *ngIf="auth.role() === 'teacher'"
+        routerLink="/attendance">
+        Attendance
+      </a>
+
+      <a routerLink="/records">
+        Records
+      </a>
+
+    </nav>
+
+
+    <h1>
+      Welcome, {{auth.user()?.full_name}}!
+    </h1>
+
+    <p>
+      School Attendance Management System
+    </p>
+
+
+    <ion-card class="date-card">
+
+      <ion-card-content>
+
+        <ion-icon name="calendar"></ion-icon>
+
+        Today's Date
+
+        <h2>
+          {{today | date:'MMMM d, y'}}
+        </h2>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <ion-grid>
+
+      <ion-row>
+
+
+        <ion-col size="6">
+
+          <ion-card class="stat">
+
+            <ion-card-content>
+
+              <ion-icon name="people"></ion-icon>
+
+              <p>Total Students</p>
+
+              <h1>
+                {{school.dashboard().total_students}}
+              </h1>
+
+            </ion-card-content>
+
+          </ion-card>
+
+        </ion-col>
+
+
+        <ion-col size="6">
+
+          <ion-card class="stat present">
+
+            <ion-card-content>
+
+              <ion-icon name="checkmark-circle"></ion-icon>
+
+              <p>Present</p>
+
+              <h1>
+                {{school.dashboard().present}}
+              </h1>
+
+            </ion-card-content>
+
+          </ion-card>
+
+        </ion-col>
+
+
+        <ion-col size="6">
+
+          <ion-card class="stat absent">
+
+            <ion-card-content>
+
+              <ion-icon name="close-circle"></ion-icon>
+
+              <p>Absent</p>
+
+              <h1>
+                {{school.dashboard().absent}}
+              </h1>
+
+            </ion-card-content>
+
+          </ion-card>
+
+        </ion-col>
+
+
+        <ion-col size="6">
+
+          <ion-card class="stat late">
+
+            <ion-card-content>
+
+              <ion-icon name="time"></ion-icon>
+
+              <p>Late</p>
+
+              <h1>
+                {{school.dashboard().late}}
+              </h1>
+
+            </ion-card-content>
+
+          </ion-card>
+
+        </ion-col>
+
+
+      </ion-row>
+
+    </ion-grid>
+
+
+    <ion-card>
+
+      <ion-card-content>
+
+        <h2>Attendance Overview</h2>
+
+        <h1>
+          {{school.dashboard().attendance_percentage}}%
+        </h1>
+
+        <ion-progress-bar
+          [value]="school.dashboard().attendance_percentage / 100">
+        </ion-progress-bar>
+
+        <p>
+          Percentage of students marked Present
+        </p>
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <ion-button
+      *ngIf="auth.role() === 'teacher'"
+      expand="block"
+      routerLink="/attendance">
+
+      <ion-icon
+        name="checkmark-circle"
+        slot="start">
+      </ion-icon>
+
+      Take Attendance
+
+    </ion-button>
+
+
+    <ion-button
+      *ngIf="auth.role() === 'registrar'"
+      expand="block"
+      routerLink="/students">
+
+      <ion-icon
+        name="people"
+        slot="start">
+      </ion-icon>
+
+      Manage Students
+
+    </ion-button>
+
+
+    <ion-button
+      expand="block"
+      fill="outline"
+      routerLink="/schedule">
+
+      <ion-icon
+        name="calendar"
+        slot="start">
+      </ion-icon>
+
+      View Class Schedule
+
+    </ion-button>
+
+
+  </ion-content>

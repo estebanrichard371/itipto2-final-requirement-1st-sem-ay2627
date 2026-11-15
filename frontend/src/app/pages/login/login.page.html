@@ -1,0 +1,103 @@
+<ion-content class="login-bg">
+
+    <div class="login-container">
+
+      <ion-card>
+
+        <ion-card-header>
+
+          <ion-icon
+            class="brand-icon"
+            name="school"
+            color="primary">
+          </ion-icon>
+
+          <ion-card-title>
+            School Attendance System
+          </ion-card-title>
+
+          <p>Sign in to continue</p>
+
+        </ion-card-header>
+
+
+        <ion-card-content>
+
+          <ion-segment [(ngModel)]="roleChoice">
+
+            <ion-segment-button value="registrar">
+              Registrar
+            </ion-segment-button>
+
+            <ion-segment-button value="teacher">
+              Teacher
+            </ion-segment-button>
+
+          </ion-segment>
+
+
+          <ion-item>
+
+            <ion-label position="stacked">
+              Username
+            </ion-label>
+
+            <ion-input
+              [(ngModel)]="username"
+              placeholder="Enter username">
+            </ion-input>
+
+          </ion-item>
+
+
+          <ion-item>
+
+            <ion-label position="stacked">
+              Password
+            </ion-label>
+
+            <ion-input
+              [(ngModel)]="password"
+              type="password"
+              placeholder="Enter password">
+            </ion-input>
+
+          </ion-item>
+
+
+          <p class="error" *ngIf="error()">
+            {{error()}}
+          </p>
+
+
+          <ion-button
+            expand="block"
+            (click)="login()"
+            [disabled]="loading()">
+
+            <ion-icon
+              name="log-in"
+              slot="start">
+            </ion-icon>
+
+            {{loading() ? 'Signing in...' : 'Login'}}
+
+          </ion-button>
+
+
+          <p class="muted">
+            Registrar: registrar / registrar123
+          </p>
+
+          <p class="muted">
+            Teacher: teacher / teacher123
+          </p>
+
+        </ion-card-content>
+
+      </ion-card>
+
+    </div>
+
+  </ion-content>
+

@@ -1,0 +1,155 @@
+<ion-header>
+
+    <ion-toolbar color="primary">
+
+      <ion-title>
+
+        <ion-icon name="list"></ion-icon>
+
+        Attendance Records
+
+      </ion-title>
+
+    </ion-toolbar>
+
+  </ion-header>
+
+
+  <ion-content class="ion-padding">
+
+
+    <nav class="tabs">
+
+      <a routerLink="/dashboard">Dashboard</a>
+
+      <a routerLink="/schedule">Schedule</a>
+
+      <a routerLink="/grading">Grading</a>
+
+      <a
+        *ngIf="auth.role() === 'teacher'"
+        routerLink="/attendance">
+        Attendance
+      </a>
+
+
+      <a routerLink="/records" class="active">
+        Records
+      </a>
+
+    </nav>
+
+
+    <h1>Attendance Records</h1>
+
+    <p>View previously saved attendance</p>
+
+
+    <ion-item>
+
+      <ion-label position="stacked">
+        Filter by Date
+      </ion-label>
+
+      <ion-input
+        type="date"
+        [(ngModel)]="filterDate">
+      </ion-input>
+
+    </ion-item>
+
+
+    <ion-button
+      expand="block"
+      (click)="load()">
+
+      <ion-icon name="eye" slot="start"></ion-icon>
+
+      View Records
+
+    </ion-button>
+
+
+    <ion-card
+      *ngFor="let r of school.records()">
+
+      <ion-card-content>
+
+        <h2>{{r.student_name}}</h2>
+
+        <p>
+          {{r.attendance_date | date:'MMMM d, y'}}
+        </p>
+
+        <p>
+          Student ID: {{r.student_number}}
+        </p>
+
+
+        <ion-item>
+
+          <ion-label>Status</ion-label>
+
+          <ion-select
+            [(ngModel)]="editStatuses[r.id]">
+
+            <ion-select-option value="Present">
+              Present
+            </ion-select-option>
+
+            <ion-select-option value="Absent">
+              Absent
+            </ion-select-option>
+
+            <ion-select-option value="Late">
+              Late
+            </ion-select-option>
+
+          </ion-select>
+
+        </ion-item>
+
+
+        <p>
+          Marked by: {{r.marked_by}}
+        </p>
+
+
+        <ion-button
+          *ngIf="auth.role() === 'teacher'"
+          size="small"
+          fill="outline"
+          (click)="update(r)">
+
+          <ion-icon name="save"></ion-icon>
+
+          Update
+
+        </ion-button>
+
+
+        <ion-button
+          *ngIf="auth.role() === 'teacher'"
+          size="small"
+          color="danger"
+          fill="outline"
+          (click)="remove(r.id)">
+
+          <ion-icon name="trash"></ion-icon>
+
+          Delete
+
+        </ion-button>
+
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <p *ngIf="school.records().length === 0">
+      No attendance records found.
+    </p>
+
+
+  </ion-content>

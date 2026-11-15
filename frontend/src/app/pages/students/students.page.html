@@ -1,0 +1,194 @@
+<ion-header>
+
+    <ion-toolbar color="primary">
+
+      <ion-title>
+
+        <ion-icon name="people"></ion-icon>
+
+        Student Management
+
+      </ion-title>
+
+    </ion-toolbar>
+
+  </ion-header>
+
+
+  <ion-content class="ion-padding">
+
+
+    <nav class="tabs">
+
+      <a routerLink="/dashboard">Dashboard</a>
+
+      <a routerLink="/schedule">Schedule</a>
+
+      <a routerLink="/grading">Grading</a>
+
+      <a routerLink="/students" class="active">
+        Students
+      </a>
+
+      <a routerLink="/records">Records</a>
+
+    </nav>
+
+
+    <h1>
+      {{editingId ? 'Update Student' : 'Add Student'}}
+    </h1>
+
+
+    <ion-card>
+
+      <ion-card-content>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            Student Number *
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="form.student_number">
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            First Name *
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="form.first_name">
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            Last Name *
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="form.last_name">
+          </ion-input>
+
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label position="stacked">
+            Grade and Section
+          </ion-label>
+
+          <ion-input
+            [(ngModel)]="form.grade_section">
+          </ion-input>
+
+        </ion-item>
+
+
+        <p class="error" *ngIf="error">
+          {{error}}
+        </p>
+
+
+        <ion-button
+          expand="block"
+          (click)="save()">
+
+          <ion-icon
+            name="save"
+            slot="start">
+          </ion-icon>
+
+          {{editingId ? 'Update Student' : 'Add Student'}}
+
+        </ion-button>
+
+
+        <ion-button
+          expand="block"
+          fill="clear"
+          (click)="reset()">
+
+          Clear Form
+
+        </ion-button>
+
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+    <h2>
+      Student List ({{school.students().length}})
+    </h2>
+
+
+    <ion-searchbar
+      placeholder="Search students"
+      (ionInput)="search = $any($event).detail.value || ''">
+    </ion-searchbar>
+
+
+    <ion-card
+      *ngFor="let s of filteredStudents()">
+
+      <ion-card-content>
+
+        <h2>
+          {{s.last_name}}, {{s.first_name}}
+        </h2>
+
+        <p>
+          Student No.: {{s.student_number}}
+        </p>
+
+        <p>
+          {{s.grade_section}}
+        </p>
+
+
+        <ion-button
+          size="small"
+          fill="outline"
+          (click)="edit(s)">
+
+          <ion-icon name="create"></ion-icon>
+
+          Edit
+
+        </ion-button>
+
+
+        <ion-button
+          size="small"
+          color="danger"
+          fill="outline"
+          (click)="remove(s.id)">
+
+          <ion-icon name="trash"></ion-icon>
+
+          Delete
+
+        </ion-button>
+
+
+      </ion-card-content>
+
+    </ion-card>
+
+
+  </ion-content>
+

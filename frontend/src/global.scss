@@ -1,0 +1,362 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+@import '@ionic/angular/css/core.css';
+@import '@ionic/angular/css/normalize.css';
+@import '@ionic/angular/css/structure.css';
+@import '@ionic/angular/css/typography.css';
+@import '@ionic/angular/css/padding.css';
+@import '@ionic/angular/css/float-elements.css';
+@import '@ionic/angular/css/text-alignment.css';
+@import '@ionic/angular/css/text-transformation.css';
+@import '@ionic/angular/css/flex-utils.css';
+@import '@ionic/angular/css/display.css';
+
+:root {
+  --ion-color-primary: #3d5d94;
+  --ion-color-primary-rgb: 18,96,245;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-font-family: Arial, sans-serif;
+}
+
+ion-content {
+  --background: #0f131d;
+}
+
+ion-toolbar {
+  --min-height: 58px;
+}
+
+ion-card {
+  border-radius: 16px;
+  margin: 12px 0;
+  box-shadow: 0 3px 14px rgba(26, 49, 66, 0.1);
+}
+
+ion-card-content {
+  padding: 17px;
+}
+
+h1 {
+  color: #2952d9;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+h2 {
+  color: #2b52dc;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+p {
+  color: #2d68ff;
+}
+
+/* NAVIGATION */
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 7px 0 20px;
+}
+
+.tabs a {
+  text-decoration: none;
+  color: #1c273d;
+  background: #e8efff;
+  padding: 10px 13px;
+  border-radius: 22px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tabs a.active {
+  background: #1e2c46;
+  color: #ffffff;
+}
+
+/* DASHBOARD */
+
+.date-card {
+  background: #e8f0ff;
+}
+
+.stat {
+  text-align: center;
+  min-height: 118px;
+}
+
+.stat ion-icon {
+  font-size: 28px;
+  color: #2d4166;
+}
+
+.stat h1 {
+  font-size: 30px;
+  margin: 4px 0;
+}
+
+/* PRESENT */
+
+.present {
+  background: #e3f7ee;
+}
+
+.present ion-icon {
+  color: #16a05a;
+}
+
+/* ABSENT */
+
+.absent {
+  background: #fdebed;
+}
+
+.absent ion-icon {
+  color: #d62e37;
+}
+
+/* LATE */
+
+.late {
+  background: #fff1dc;
+}
+
+.late ion-icon {
+  color: #e98212;
+}
+
+/* LOGIN */
+
+.login-bg {
+  --background: linear-gradient(
+    150deg,
+    #0759ed,
+    #edf3ff 75%
+  );
+}
+
+.login-container {
+  max-width: 430px;
+  margin: 10vh auto;
+  padding: 16px;
+}
+
+.login-container ion-card {
+  padding: 12px;
+  text-align: center;
+}
+
+.login-container .brand-icon {
+  font-size: 52px;
+  margin: 12px;
+}
+
+.login-container ion-card-title {
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.login-container ion-item {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.error {
+  color: #c62828;
+}
+
+.muted {
+  color: #60708f;
+  font-size: 13px;
+}
+
+.status-present {
+  color: #16844b;
+  font-weight: 700;
+}
+
+.status-absent {
+  color: #c62828;
+  font-weight: 700;
+}
+
+.status-late {
+  color: #b56a00;
+  font-weight: 700;
+}
+
+
+/* =================================
+   SCHOOL ATTENDANCE SYSTEM THEME
+================================= */
+
+:root {
+  --ion-color-primary: #2164f3;
+  --ion-color-primary-rgb: 33, 100, 243;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-shade: #1d58d6;
+  --ion-color-primary-tint: #3775f4;
+
+  --app-background: #0f121c;
+  --app-header: #405f96;
+  --app-card: #1f1f1f;
+  --app-blue: #2f63ff;
+  --app-light-blue: #e8efff;
+  --app-white: #ffffff;
+}
+
+/* MAIN PAGE BACKGROUND */
+
+ion-content {
+  --background: #0f121c;
+  --color: #ffffff;
+}
+
+/* HEADER */
+
+ion-header ion-toolbar {
+  --background: #0860f8;
+  --color: #ffffff;
+  --border-color: transparent;
+}
+
+ion-title {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* PAGE HEADINGS */
+
+h1, h2, h3 {
+  color: #2f63ff;
+}
+
+/* CARDS */
+
+ion-card {
+  --background: #1f1f1f;
+  --color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* CARD TITLES */
+
+ion-card-title {
+  color: #2f63ff;
+}
+
+/* INPUTS AND SELECTS */
+
+ion-item {
+  --background: #1f1f1f;
+  --color: #ffffff;
+  --border-color: #343b4c;
+}
+
+ion-label {
+  color: #ffffff;
+}
+
+ion-select {
+  --placeholder-color: #aab8d5;
+  color: #ffffff;
+}
+
+/* BUTTONS */
+
+ion-button {
+  --background: #2164f3;
+  --color: #ffffff;
+  --border-radius: 8px;
+  font-weight: 600;
+}
+
+/* NAVIGATION BUTTONS */
+
+.page-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 25px;
+}
+
+.page-navigation a {
+  background: #e8efff;
+  color: #17233d;
+  padding: 11px 17px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.page-navigation a.active {
+  background: #203253;
+  color: #ffffff;
+}
+
+.page-navigation a:hover {
+  background: #405f96;
+  color: #ffffff;
+}
+
+/* TABLES */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #ffffff;
+}
+
+thead {
+  background: #405f96;
+  color: #ffffff;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #343b4c;
+}
+
+tbody tr:hover {
+  background: #292d38;
+}
